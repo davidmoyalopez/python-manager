@@ -5,8 +5,6 @@ import time
 
 class OpenVpn(object):
 
-    HOME = os.environ['HOME']
-    config_file = HOME + "/Documents/pfsense/vpn/david.moya-config.conf"
     sudo_pass = ''
     file_path = "/tmp/.sudo_pass.txt"
 
@@ -45,8 +43,8 @@ class OpenVpn(object):
         except OSError as e:
             print("Error: %s : %s" % (self.file_path, e.strerror))
 
-    def up(self):
-        subprocess = Popen(["sudo", "-S", "openvpn", "--route-gateway", "dhcp", "--allow-pull-fqdn", "--config", self.config_file], stderr=PIPE, stdin=PIPE, universal_newlines=True)
+    def up(self, config_file_path):
+        subprocess = Popen(["sudo", "-S", "openvpn", "--route-gateway", "dhcp", "--allow-pull-fqdn", "--config", config_file_path], stderr=PIPE, stdin=PIPE, universal_newlines=True)
         out, err = subprocess.communicate(self.sudo_pass + '\n')
         if 'incorrect' in err: 
             self.delete_password()

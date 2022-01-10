@@ -11,8 +11,8 @@ class Manage(object):
         status = self.openvpn.status
         print("VPN IS:",status())
 
-    def vpn_up(self):
-        status = self.openvpn.up
+    def vpn_up(self, config_file_path):
+        status = self.openvpn.up(config_file_path)
         print("VPN IS:",status())
 
     def vpn_down(self):
