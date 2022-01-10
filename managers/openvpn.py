@@ -49,7 +49,7 @@ class OpenVpn(object):
         if 'incorrect' in err: 
             self.delete_password()
             return "ERROR"
-        return "UP"
+        return True
 
     def down(self):
         pid = Popen(["pidof", "openvpn"], stdout=PIPE)
@@ -60,4 +60,4 @@ class OpenVpn(object):
         if 'incorrect' in err: 
             self.delete_password()
             return "ERROR"
-        return "DOWN"
+        return True
